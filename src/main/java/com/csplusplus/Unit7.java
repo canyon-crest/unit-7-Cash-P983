@@ -1,6 +1,7 @@
 package com.csplusplus;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Unit7 {
 
@@ -9,7 +10,11 @@ public class Unit7 {
     // DO NOT use the Collections class or any additional methods beyond size(), add(), get(), set(), and remove().
     public static int sumOfElements(ArrayList<Integer> list) {
         // TODO: Implement this method
-        return 0;  // Placeholder return value
+    	int sum = 0;
+    	for(int i=0; i< list.size(); i++) {
+    		sum += list.get(i);
+    	}
+        return sum;  // Placeholder return value
     }
 
     // 2. Method that removes all instances of a specific element from the ArrayList
@@ -17,6 +22,11 @@ public class Unit7 {
     // DO NOT use removeIf(), Collections, or other methods beyond size(), add(), get(), set(), and remove().
     public static void removeAllInstances(ArrayList<Integer> list, int elementToRemove) {
         // TODO: Implement this method
+    		for(int i = list.size()-1; i>=0; i--) {
+    			if (list.get(i) == elementToRemove) {
+    				list.remove(i);
+    			}
+    		}
     }
 
     // 3. Method that doubles each element in the ArrayList
@@ -24,21 +34,43 @@ public class Unit7 {
     // DO NOT use Collections or other methods beyond size(), add(), get(), set(), and remove().
     public static void doubleAllElements(ArrayList<Integer> list) {
         // TODO: Implement this method
+    	for(int i=0; i< list.size(); i++) {
+    		int origVal = list.get(i);
+    		list.set(i, origVal *=2);
+    	}
     }
 
     // 4. Method that adds a new element to the list only if it is not already present
     // Instructions: Check manually if the element is already present before adding.
     // DO NOT use contains(), Collections, or other methods beyond size(), add(), get(), set(), and remove().
     public static void addIfNotPresent(ArrayList<Integer> list, int newElement) {
-        // TODO: Implement this method
+        boolean isPresent = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(newElement)) {
+                isPresent = true;
+                break;
+            }
+        }
+        if (!isPresent) {
+            list.add(newElement);
+        }
     }
 
     // 5. Method that returns a new ArrayList containing only the even elements from the input list
     // Instructions: Create a new list and manually collect the even elements.
     // DO NOT use streams, Collections, or other methods beyond size(), add(), get(), set(), and remove().
     public static ArrayList<Integer> getEvenElements(ArrayList<Integer> list) {
+    	
         // TODO: Implement this method
-        return null;  // Placeholder return value
+    	ArrayList<Integer> evenList = new ArrayList<>();
+    	for(int i=0; i< list.size(); i++) {
+    		if(list.get(i) % 2 == 0) {
+    			evenList.add(list.get(i));
+    		}
+    	}
+    	
+    	
+        return evenList;  // Placeholder return value
     }
 
     // 6. Method that removes elements divisible by 5
@@ -46,19 +78,44 @@ public class Unit7 {
     // DO NOT use removeIf(), Collections, or other methods beyond size(), add(), get(), set(), and remove().
     public static void removeElementsDivisibleBy5(ArrayList<Integer> list) {
         // TODO: Implement this method
+    	for(int i = list.size()-1; i>=0; i--) {
+    		if(list.get(i) % 5 == 0) {
+    			list.remove(i);
+    		}
+    	}
     }
 
     // 7. Method that reverses the list without using the Collections class
     // Instructions: Reverse the order of the elements by swapping them manually.
     // DO NOT use Collections or other methods beyond size(), add(), get(), set(), and remove().
     public static void reverseList(ArrayList<Integer> list) {
-        // TODO: Implement this method
+        int left = 0;
+        int right = list.size() - 1;
+        while (left < right) {
+            // Swap elements at left and right indices.
+            int temp = list.get(left);
+            list.set(left, list.get(right));
+            list.set(right, temp);
+            left++;
+            right--;
+        }
     }
 
-    // 8. Method that shuffles the elements of the list
-    // Instructions: Shuffle the elements randomly by swapping them manually.
-    // DO NOT use the Collections.shuffle() or other methods beyond size(), add(), get(), set(), and remove().
+    /**
+     * 8. Method that shuffles the elements of the list
+     * Instructions: Shuffle the elements randomly by swapping them manually.
+     * DO NOT use the Collections.shuffle() or other methods beyond size(), add(), get(), set(), and remove().
+     *
+     * @param list The ArrayList of integers.
+     */
     public static void shuffleList(ArrayList<Integer> list) {
-        // TODO: Implement this method
+        Random random = new Random();
+        for (int i = list.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            int temp = list.get(i);
+            list.set(i, list.get(j));
+            list.set(j, temp);
+        }
     }
 }
+
